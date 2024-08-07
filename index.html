@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouTube Clone</title>
+    <link rel="icon" type="image/x-icon" href="/images/yt.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+</head>
+<body>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 13px;
+            margin: 0px;
+            padding-top: 80px;
+            padding-left: 96px;
+            padding-right: 24px;
+            background-color: rgb(240, 240, 240);
+
+        }
+        .thumb{
+            width: 100%;
+           
+            
+        }
+        p{
+            font-family:Roboto ;
+            margin-top: 0px;
+            margin-bottom: 0px;
+        }
+        .search{
+            display: inline-block;
+        }
+        .video-title{
+            font-size: 14px;
+            margin-top: 0px;
+            margin-bottom: 12px;
+            font-weight: bold;
+            line-height: 20px;
+        }
+        
+       
+       .video-info{
+        display: inline-block;
+        width: 250px;
+        
+       }
+       .profile-picture{
+        width: 40px;
+        border-radius: 50px;
+        
+       }
+       .thumbnail-row{
+        margin-bottom: 12px;
+        position: relative;
+        cursor: pointer;
+        
+       }
+       .video-author,.video-stats{
+        margin-bottom: 3px;
+        color: rgb(96, 96, 96);
+       }
+       .video-info-gird{
+        display: grid;
+        grid-template-columns: 50px 1fr ;
+        cursor: pointer;
+       }
+       .video-gird{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        row-gap: 15px;
+        column-gap: 15px;
+        background-color: rgb(240, 240, 240);
+       }
+       @media (max-width:1028px){
+        .video-gird{
+            grid-template-columns: 1fr 1fr ;
+        }
+       }
+       @media (max-width:1400){
+        .video-gird{
+            grid-template-columns: 1fr 1fr 1fr 1fr ;
+        }
+       }
+       @media (max-width:735px) {
+        .video-gird{
+            grid-template-columns: 1fr;
+        }
+        
+       }
+       .header{
+        height: 55px;
+        display: flex;
+        flex-direction:row;
+        justify-content: space-between;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        background-color: white;
+        border-bottom: 1px solid rgb(231, 228, 228);
+        z-index: 2;
+        
+       }
+       .left-part{
+        display: flex;
+        align-items: center;
+        
+       }
+       .right-part{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 200px;
+        margin-right: 20px;
+        flex-shrink: 0;
+       }
+       .middle-part{
+        flex: 1;
+        
+        margin-left: 70px;
+        margin-right: 35px;
+        max-width: 700px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+       }
+       .hamburger-menu{
+        height: 25px;
+        margin-left: 24px;
+        margin-right: 20px;
+       }
+       .youtube-logo{
+        height: 20px;
+       }
+       .search-button{
+        height: 40px;
+        width: 60px;
+        background-color: rgb(241, 241, 241);
+        border: 1px solid rgb(167, 164, 164);;
+        border-radius: 0 5px 5px 0;
+        margin-right: 10px;
+       }
+       .search-bar{
+        flex:1;
+        height: 36px;
+        font-size: 15px;
+        padding-left: 10px;
+        border: 1px solid rgb(167, 164, 164);
+        box-shadow: inset 1px 2px 5px rgba(0,0,0,0.05);
+        border-radius: 10px 0 0 10px;
+        border-right: none;
+        width: 50px;
+       }
+       .search-bar::placeholder{
+        font-family: roboto;
+        
+        font-size: 15px;
+       }
+       .search-image{
+        width: 28px;
+        margin-top: 3px;
+       }
+       .voice{
+        height: 25px;
+        margin-top: 2px;
+        
+       }
+       .voice-button{
+        height: 40px;
+        width: 40px;
+        border-radius: 50%;
+        border: 0 solid rgb(167, 164, 164);
+       }
+       .uploadpic{
+        height: 33px;
+       }
+       .apps{
+        height: 33px;
+       }
+       .notificationspic{
+        height: 33px;
+       }
+       
+       .propic{
+        height: 33px;
+        border-radius: 50%;
+       }
+       .sidebar{
+        background-color: rgb(255, 255, 255);
+        position: fixed;
+        left: 0;
+        bottom: 0;
+        top: 56px;
+        width: 72px;
+        z-index: 1;
+       }
+       .video-time{
+        background-color: black;
+        color: white;
+        position: absolute;right: 8px;
+        font-family: roboto;
+        font-size: 12px;
+        font-weight: 500;
+        padding: 4px;
+        bottom: 10px;
+        border-radius: 4px;
+       }
+       .notificationposition{
+        position: relative;
+       }
+       .notification-number{
+        position: absolute;
+        top: 0;
+        right: -5px;
+        background-color: rgb(209, 2, 2);
+        color: white;
+        padding: 2px 6px;
+        border-radius: 50%;
+        font-family: rotobo;
+        font-size: 12px;
+       }
+       .sidebar-link{
+        height: 76px;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        border-right:1px solid rgb(231, 228, 228); ;
+       }
+       .sidebar-link:hover{
+        background-color: rgb(216, 216, 216);
+        cursor: pointer;
+       }
+       .sidebar img{
+        height: 30px;
+        margin-bottom: 5px;
+        
+       }
+       .sidebar div{
+        font-size: 10px;
+        font-family: roboto;
+
+       }
+    </style>
+    <div class="header">
+        <div class="left-part">
+            <img class="hamburger-menu" style="cursor: pointer;" src="/images/hamburger-menu.svg" alt="">
+            <img class="youtube-logo" style="cursor: pointer;" src="/images/youtube-logo.svg" alt="">
+        </div>
+        <div class="middle-part">
+            <input class="search-bar" type="text" placeholder="Search">
+            <button class="search-button" style="cursor: pointer;"><img class="search-image" src="/images/search.svg" alt=""></button>
+            <button class="voice-button" style="cursor: pointer;"><img class="voice" src="/images/voice-search-icon.svg" alt=""></button>
+        </div>
+        <div class="right-part">
+            <img class="uploadpic" style="cursor: pointer;" src="/images/upload.svg" alt="">
+            <img class="apps" style="cursor: pointer;" src="/images/youtube-apps.svg" alt="">
+            <div class="notificationposition" style="cursor: pointer;"><img class="notificationspic" src="/images/notifications.svg" alt="">
+            <div class="notification-number">3</div>
+            </div>
+            <div class="propicdiv" style="cursor: pointer;"><img class="propic" src="/images/profile-pic.png" alt=""></div>
+        </div>
+        
+    </div>
+
+    <div class="sidebar">
+        <div class="sidebar-link"><img src="/images/home.svg" alt=""><div>Home</div></div>
+        <div class="sidebar-link"><img src="images/explore.svg" alt=""><div>Explore</div></div>
+        <div class="sidebar-link"><img src="images/subscriptions.svg" alt=""><div>Subscriptions</div></div>
+        <div class="sidebar-link"><img src="images/originals.svg" alt=""><div>Originals</div></div>
+        <div class="sidebar-link"><img src="images/youtube-music.svg" alt=""><div>YouTube Music</div></div>
+        <div class="sidebar-link"><img src="images/library.svg" alt=""><div>Library</div></div>
+    </div>
+    
+
+    <div class="video-gird">
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img src="/images/thumb1.jpeg" alt="thumbnail" class="thumb">
+                <div class="video-time">14:20</div>
+            </div>
+            <div class="video-info-gird" >
+                <div class="profile-pic">
+                    <img class="profile-picture" src="/images/channel-1.jpeg" alt="">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Watch here to find the easiest way to make youtube !</p>
+                <p class="video-author">Marques Brownlee</p>
+                <p class="video-stats">3.4M views &#183; 6 Months ago</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img src="/images/thumb2.webp" alt="thumbnail" class="thumb">
+                <div class="video-time">4:20</div>
+            </div>
+            <div class="video-info-gird">
+                <div class="profile-pic">
+                    <img class="profile-picture" src="/images/channel-2.jpeg" alt="">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Top 10 Secrets you should know</p>
+                <p class="video-author">Marques Brownlee</p>
+                <p class="video-stats">16M views &#183; 4 Years ago</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img src="/images/thumb3.jpg" alt="thumbnail" class="thumb">
+                <div class="video-time">5:00</div>
+            </div>
+            <div class="video-info-gird">
+                <div class="profile-pic">
+                    <img class="profile-picture" src="/images/channel-3.jpeg" alt="">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Make professional thumbnails</p>
+                <p class="video-author">Marques Brownlee</p>
+                <p class="video-stats">16M views &#183; 4 Years ago</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img src="/images/thumbnail-4.webp" alt="thumbnail" class="thumb">
+                <div class="video-time">12:50</div>
+            </div>
+            <div class="video-info-gird" >
+                <div class="profile-pic">
+                    <img class="profile-picture" src="/images/channel-4.jpeg" alt="">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Easiest way to slove the equations</p>
+                <p class="video-author">Marques Brownlee</p>
+                <p class="video-stats">3.4M views &#183; 6 Months ago</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img src="/images/thumbnail-5.webp" alt="thumbnail" class="thumb">
+                <div class="video-time">16:10</div>
+            </div>
+            <div class="video-info-gird">
+                <div class="profile-pic">
+                    <img class="profile-picture" src="/images/channel-5.jpeg" alt="">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">kadane's Algortihms in 5mins</p>
+                <p class="video-author">Marques Brownlee</p>
+                <p class="video-stats">16M views &#183; 4 Years ago</p>
+                </div>
+            </div>
+        </div>
+    
+        <div class="video-preview">
+            <div class="thumbnail-row">
+                <img src="/images/thumbnail-6.webp" alt="thumbnail" class="thumb">
+                <div class="video-time">6:20</div>
+            </div>
+            <div class="video-info-gird">
+                <div class="profile-pic">
+                    <img class="profile-picture" src="/images/channel-6.jpeg" alt="">
+                </div>
+                <div class="video-info">
+                    <p class="video-title">Insane floor mat!!!</p>
+                <p class="video-author">Marques Brownlee</p>
+                <p class="video-stats">16M views &#183; 4 Years ago</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+
+</body>
+</html>
